@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShoVzyat — спільний список</title>
+<style>
+  :root { color-scheme: light dark; --bg: #fbf8ff; --fg: #1b1b21; --muted: #5d5e67; --accent: #4a5bb5; --card: #ffffff; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #131318; --fg: #e4e1e9; --muted: #c6c5d0; --accent: #b9c3ff; --card: #1f1f25; } }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.5 system-ui, sans-serif; }
+  main { max-width: 420px; margin: 0 auto; padding: 48px 16px; }
+  .card { background: var(--card); border-radius: 20px; padding: 24px; }
+  h1 { font-size: 22px; margin: 0 0 8px; }
+  p { color: var(--muted); margin: 0 0 16px; }
+  .code { font-size: 32px; letter-spacing: 6px; font-weight: 600; margin: 8px 0 20px; }
+  a.btn { display: block; text-align: center; background: var(--accent); color: var(--bg); text-decoration: none;
+          padding: 14px; border-radius: 999px; font-weight: 600; }
+</style>
+</head>
+<body>
+<main><div class="card">
+  <h1>Запрошення до спільного списку</h1>
+  <p>Відкрий у додатку ShoVzyat або введи код у «Список → Спільний список».</p>
+  <div class="code" id="code">—</div>
+  <a class="btn" id="open" href="#">Відкрити в ShoVzyat</a>
+</div></main>
+<script>
+  var c = (new URLSearchParams(location.search).get('c') || '').toUpperCase();
+  if (/^[A-Z0-9]{8}$/.test(c)) {
+    document.getElementById('code').textContent = c;
+    document.getElementById('open').href =
+      'intent://join/' + c + '#Intent;scheme=ua.shovzyat;package=ua.shovzyat.shovzyat;end';
+  }
+</script>
+</body>
+</html>
